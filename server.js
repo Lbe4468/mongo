@@ -12,13 +12,17 @@ var app = express();
 // Set up Express Router
 var router = express.Router();
 
+// Require our routes file and pass our router object
+require("./config/routes")(router);
+
 // Designate public folder as static directory
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(process.cwd() + '/public'));
 
 // Connect Handlebars to Express app
 app.engine('handlebars', expressHandlebars({
     defaultLayout: 'main'
 }));
+app.set("view engine", "handlebars");
 
 // Set every request to go through router middleware
 app.use(router);
