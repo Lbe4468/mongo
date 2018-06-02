@@ -1,43 +1,36 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">Saved Articles</a>
+<!--Saved Articles Page-->
+
+<div class="container">
+
+    <div class="col-md-12">
+        <div class="jumbotron text-center headings-display main">
+            <h1> Saved Articles</h1>
         </div>
-        <ul class="nav navbar-nav">
-            <li class="active">
-                <a href="/">Home</a>
-            </li>
-            <li>
-                <a href="/saved">Saved Articles</a>
-            </li>
-            {{!-- <li>
-                <a class="btn btn-danger scrape-new">SCRAPE NEW ARTICLES</a>
-            </li> --}}
-        </ul>
     </div>
-</nav>
-
-<div class="jumbotron text-center">
-    <div class="overlay">
-    </div>
-    <div class="background-image">
-    </div>
-    <div class="caption">
-        <h1>Saved Articles</h1>
-        <p>Your Saved Articles</p>
+    <div class="col-md-12">
+        {{#if article}} {{#each article}}
+        <div class="panel panel-default">
+            <div class="panel-heading headings-display">
+                <h4>{{this.title}}</h4>
+            </div>
+            <div class="panel-body headings-display">
+                <p> {{this.summary}}</p>
+                <a href={{this.link}} target="_blank">{{this.link}}</a>
+                <br>
+                <br>
+                <button type="button" class="btn btn-success addNote" data-toggle="modal" data-target="#noteModal{{this._id}}" data-id={{this._id}}>Add a Note</button>
+                <button type="button" class="btn btn-danger delete" data-id={{this._id}}>Delete</button>
+            </div>
+        </div>
+        {{/each}} {{else}}
+        <div class="panel panel-default">
+            <div class="panel-body headings-display">
+                <h4>You have no saved articles.</h4>
+            </div>
+        </div>
+        {{/if}}
     </div>
 </div>
-<div class="container-fluid article-container">
-</div>
 
-<footer class="footer">
-    <div class="container">
-        <p>New York Times Mongo Scraper</p>
-    </div>
-</footer>
-
-<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-    crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
-<script src="../../assets/javascript/saved.js"></script>
+<!--Clicked Notes Modal-->
+{{#each article}} {{> notes-modal }} {{/each}}
