@@ -25,3 +25,7 @@ body {
 .headings-display.main {
     border: 3px solid rgb(38, 36, 36);
 }
+
+#home-header {
+    margin-top: 150px;
+}
